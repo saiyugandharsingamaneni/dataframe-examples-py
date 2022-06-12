@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     print("\nConvert RDD to Dataframe using SparkSession.createDataframe(),")
     # Creating RDD of Row
-    txn_fct_rdd = spark.sparkContext.textFile("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/txn_fct.csv") \
+    txn_fct_rdd = spark.sparkContext.textFile("s3a://" + str(app_conf["s3_conf"]["s3_bucket"]) + "/txn_fct.csv") \
         .filter(lambda record: record.find("txn_id")) \
         .map(lambda record: record.split("|")) \
         .map(lambda record: Row(int(record[0]), int(record[1]), float(record[2]), int(record[3]), int(record[4]), int(record[5]), record[6]))
